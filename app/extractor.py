@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def get_cryptos(symbols_raw):
+
     base_url = os.getenv("Binance", "https://api.binance.com/api/v3/ticker/price")
 
     # If symbols_raw is passed directly as a string, wrap it in a list
@@ -15,7 +16,6 @@ def get_cryptos(symbols_raw):
 
     cleaned_symbols = []
     
-    # Flatten nested structures and split comma-separated strings
     def extract_symbols(raw):
         if isinstance(raw, str):
             for part in raw.split(","):
@@ -37,8 +37,10 @@ def get_cryptos(symbols_raw):
         if len(cleaned_symbols) == 1:
             params = {"symbol": cleaned_symbols[0]}
         # Batch symbols query (JSON list format required by Binance)
+        
         else:
-            params = {"symbols": json.dumps(cleaned_symbols, separators=(',', ':'))}
+            params = {"symbols": json.dumps(cleaned_symbols, separators=(',', ':'))} # Allow for compact JSON representation
+
 
         response = requests.get(base_url, params=params, timeout=10)
 
