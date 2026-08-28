@@ -38,7 +38,7 @@ def get_cryptos(symbols_raw):
             params = {"symbol": cleaned_symbols[0]}
         # Batch symbols query (JSON list format required by Binance)
         else:
-            params = {"symbols": json.dumps(cleaned_symbols)}
+            params = {"symbols": json.dumps(cleaned_symbols, separators=(',', ':'))}
 
         response = requests.get(base_url, params=params, timeout=10)
 
