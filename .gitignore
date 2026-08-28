@@ -1,0 +1,12 @@
+binanceenv/
+test.ipynb
+.venv/
+binancenv/
+.env
+data/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
